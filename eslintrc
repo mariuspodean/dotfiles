@@ -37,7 +37,7 @@
     "valid-typeof": 2,
     // Best Practices
     "block-scoped-var": 2,
-    "complexity": 0,
+    "complexity": [2, 5],
     "consistent-return": 2,
     "curly": 2,
     "default-case": 2,
