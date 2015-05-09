@@ -6,7 +6,9 @@
     "jsx": false
   },
   "globals": {},
-  "plugins": [],
+  "plugins": [
+    "angular"
+  ],
   "rules": {
     // Possible Errors
     "comma-dangle": [2, "never"],
