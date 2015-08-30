@@ -1,0 +1,16 @@
+# jscpd - Copy/paste detector for programming source code
+# https://github.com/kucherenko/jscpd
+
+path:
+    - /
+languages:
+    - javascript
+    - coffeescript
+    - typescript
+    - ruby
+    - css
+    - htmlmixed   # html mixed source like knockout.js templates
+exclude:
+    - "**/*.min.js"
+    - "**/*.mm.js"
+reporter: json
