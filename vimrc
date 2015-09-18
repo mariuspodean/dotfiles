@@ -10,20 +10,44 @@ call vundle#begin()
 "*****************************************************************************
 "" General plugins
 "*****************************************************************************
- "Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+ Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
  Plugin 'bling/vim-airline'
+ " cd ~/.fonts && curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/DroidSansMono/Droid%20Sans%20Mono%20for%20Powerline%20Plus%20Nerd%20File%20Types.otf
+ Plugin 'ryanoasis/vim-devicons'
+
  Plugin 'airblade/vim-gitgutter'
  Plugin 'tpope/vim-sensible'
+ Plugin 'mileszs/ack.vim'
+ Plugin 'Raimondi/delimitMate'  " auto-completion for quotes, parens, brackets, etc.
+ Plugin 'tpope/vim-commentary'
+ Plugin 'tpope/vim-unimpaired'
+ Plugin 'tpope/vim-endwise'
+ Plugin 'tpope/vim-ragtag'
  Plugin 'tpope/vim-surround'
  Plugin 'scrooloose/nerdtree'
  Plugin 'jistr/vim-nerdtree-tabs'
+ Plugin 'Xuyuanp/nerdtree-git-plugin'
  Plugin 'kien/ctrlp.vim'
  Plugin 'rking/ag.vim'
  Plugin 'kana/vim-textobj-user'
- " Plugin 'christoomey/vim-tmux-navigator'
- " Plugin 'benmills/vimux'
- " auto-completion for quotes, parens, brackets, etc.
- Plugin 'Raimondi/delimitMate'
+ Plugin 'tpope/vim-repeat'
+ Plugin 'garbas/vim-snipmate'
+ Plugin 'editorconfig/editorconfig-vim'
+ Plugin 'MarcWeber/vim-addon-mw-utils'
+ Plugin 'tomtom/tlib_vim'
+ Plugin 'sotte/presenting.vim'
+ Plugin 'ervandew/supertab'
+ Plugin 'tpope/vim-dispatch'
+ Plugin 'mtth/scratch.vim'
+ Plugin 'tpope/vim-vinegar'
+ Plugin 'tpope/vim-abolish'
+ Plugin 'AndrewRadev/splitjoin.vim'
+ Plugin 'vim-scripts/matchit.zip'
+ Plugin 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
+ Plugin 'sickill/vim-pasta' " context-aware pasting
+
+ Plugin 'christoomey/vim-tmux-navigator'
+ Plugin 'benmills/vimux'
 
  " code-completion engine
  Plugin 'Valloric/YouCompleteMe'
@@ -34,7 +58,9 @@ call vundle#begin()
  let g:ycm_confirm_extra_conf=1
 
  Plugin 'scrooloose/syntastic'
- Plugin 'tpope/vim-commentary'
+
+ Plugin 'junegunn/goyo.vim', { 'on': 'Goyo' } " distraction-free writing
+ Plugin 'junegunn/limelight.vim', { 'on': 'Limelight' } " focus tool. Good for presentating with vim
 
  " visualize your Vim undo tree
  Plugin 'sjl/gundo.vim'
@@ -88,29 +114,52 @@ call vundle#begin()
 "*****************************************************************************
 "" Javascript
 "*****************************************************************************
- Plugin 'jelera/vim-javascript-syntax'
+ Plugin 'moll/vim-node', { 'for': 'javascript' }
+ Plugin 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
  Plugin 'nathanaelkane/vim-indent-guides'
   " set completeopt-=preview
  " JavaScript code analyzer for deep, cross-editor language support
  Plugin 'marijnh/tern_for_vim'
  set omnifunc=syntaxcomplete#Complete
  " polyglot language support for JS - indentation and syntax support
- Plugin 'pangloss/vim-javascript'
+ Plugin 'pangloss/vim-javascript', { 'for': 'javascript' }
  syntax enable
+
+ Plugin 'mxw/vim-jsx', { 'for': 'jsx' }
+ Plugin 'elzr/vim-json', { 'for': 'json' }
+
+ "  Plugin 'Quramy/tsuquyomi', { 'for': 'typescript', 'do': 'npm install' }
+ "  Plugin 'leafgarland/typescript-vim', { 'for': 'typescript' }
+
+ " conde analysis
+ " Plugin 'jslint.vim'
+ " Plugin 'jshint.vim'
+
 
 "*****************************************************************************
 "" Web & JS Frameworks
 "*****************************************************************************
- Plugin 'othree/html5.vim'
- Plugin 'JulesWang/css.vim'
+ Plugin 'gregsexton/MatchTag', { 'for': 'html' }
+ Plugin 'othree/html5.vim', { 'for': 'html' }
  Plugin 'amirh/HTML-AutoCloseTag'
- Plugin 'hail2u/vim-css3-syntax'
- Plugin 'glanotte/vim-jasmine'
+
+ Plugin 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
+ Plugin 'ap/vim-css-color', { 'for': 'css' }
+ Plugin 'hail2u/vim-css3-syntax', { 'for': 'css' }
+ Plugin 'JulesWang/css.vim'
  " css/less/sass/html color preview
  Plugin 'gorodinskiy/vim-coloresque'
+
+ Plugin 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' }
+ Plugin 'tpope/vim-markdown', { 'for': 'markdown' }
+
+ " Plugin 'glanotte/vim-jasmine'
+
  Plugin 'tpope/vim-haml'
+
  " expanding abbreviations >> http://emmet.io/
  Plugin 'mattn/emmet-vim'
+ 
  "Plugin 'heartsentwined/vim-ember-script'
 
 "*****************************************************************************
@@ -215,6 +264,7 @@ set gcr=a:blinkon0
 set scrolloff=3
 
 " vim-airline
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -228,7 +278,7 @@ let g:airline_left_alt_sep = '»'
 let g:airline_right_sep = '◀'
 let g:airline_right_alt_sep = '«'
 let g:airline_linecolumn_prefix = '␤ '
-"let g:airline_linecolumn_prefix = '¶ '
+let g:airline_linecolumn_prefix = '¶ '
 let g:airline_branch_prefix = '⎇ '
 let g:airline_paste_symbol = 'ρ'
 "let g:airline_paste_symbol = 'Þ'
@@ -262,24 +312,24 @@ nnoremap <silent> <F2> :NERDTreeFind<CR>
 noremap <F3> :NERDTreeToggle<CR>
 
 " Tmux integration
-""  if &term =~ '^screen'
-"    " tmux will send xterm-style keys when xterm-keys is on
-"    execute "set <xUp>=\e[1;*A"
-"    execute "set <xDown>=\e[1;*B"
-"    execute "set <xRight>=\e[1;*C"
-"    execute "set <xLeft>=\e[1;*D"
-""  endif
+if &term =~ '^screen'
+ " tmux will send xterm-style keys when xterm-keys is on
+ execute "set <xUp>=\e[1;*A"
+ execute "set <xDown>=\e[1;*B"
+ execute "set <xRight>=\e[1;*C"
+ execute "set <xLeft>=\e[1;*D"
+endif
 
-"" let g:tmux_navigator_no_mappings = 1
+let g:tmux_navigator_no_mappings = 1
 
-"" nnoremap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
-"" nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
-"" nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
-"" nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
-"" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+nnoremap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
+nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
 " Close tmux when exiting vim
-"autocmd VimLeave * silent !tmux killp -a
+" autocmd VimLeave * silent !tmux killp -a
 
 " Autoload changes in .vimrc
 autocmd BufWritePost .vimrc source $MYVIMRC
@@ -376,12 +426,12 @@ endif
 
 
  " Automatic formatting
-"" autocmd BufWritePre *.rb :%s/\s\+$//e
-"" autocmd BufWritePre *.go :%s/\s\+$//e
-"" autocmd BufWritePre *.haml :%s/\s\+$//e
-"" autocmd BufWritePre *.html :%s/\s\+$//e
-"" autocmd BufWritePre *.scss :%s/\s\+$//e
-"" autocmd BufWritePre *.slim :%s/\s\+$//e
+autocmd BufWritePre *.rb :%s/\s\+$//e
+" autocmd BufWritePre *.go :%s/\s\+$//e
+" autocmd BufWritePre *.haml :%s/\s\+$//e
+autocmd BufWritePre *.html :%s/\s\+$//e
+autocmd BufWritePre *.scss :%s/\s\+$//e
+autocmd BufWritePre *.slim :%s/\s\+$//e
 
 "" au BufNewFile * set noeol
 "" au BufRead,BufNewFile *.go set filetype=go
